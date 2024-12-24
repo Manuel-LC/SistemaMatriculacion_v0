@@ -50,10 +50,6 @@ public class Alumno {
     }
 
     private void setNia() {
-        if (this.nombre == null || this.dni == null) {
-            throw new NullPointerException("aeiou ");
-        }
-
         String letrasNombre = this.nombre.toLowerCase().substring(0, 4);
 
         String digitosDni = this.dni.substring(5, 8);
