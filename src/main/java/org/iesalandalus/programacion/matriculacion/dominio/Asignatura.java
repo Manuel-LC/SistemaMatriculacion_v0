@@ -112,7 +112,7 @@ public class Asignatura {
     }
 
     public void setHorasDesdoble(int horasDesdoble) {
-        if ((horasDesdoble <= 0) || (horasDesdoble > MAX_NUM_HORAS_DESDOBLES)) {
+        if ((horasDesdoble < 0) || (horasDesdoble > MAX_NUM_HORAS_DESDOBLES)) {
             throw new IllegalArgumentException("ERROR: El número de horas de desdoble de una asignatura no puede ser menor a 0 ni mayor a 6.");
         }
 
@@ -147,7 +147,7 @@ public class Asignatura {
     public String imprimir() {
         return "Código asignatura=" + codigo + ", nombre asignatura=" + nombre + ", ciclo formativo=" +
                 "Código ciclo formativo=" + cicloFormativo.getCodigo() + ", nombre ciclo formativo=" +
-                cicloFormativo.getNombre();
+                cicloFormativo.getNombre() + " ";
     }
 
     @Override

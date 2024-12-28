@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MatriculaTest {
-/*
+
     private static final String ERROR_EXCEPCION = "Debería haber saltado la excepción.";
     private static final String ERROR_NO_EXCEPCION = "No debería haber saltado la excepción.";
     private static final String ALUMNO_NO_ESPERADO = "El alumno devuelto no es el que debería ser.";
@@ -126,7 +126,9 @@ public class MatriculaTest {
         Matricula matricula1;
         try {
             Matricula matricula = new Matricula(ID_MATRICULA, CURSO_ACADEMICO, FECHA_MATRICULACION, alumno, coleccionAsignaturas);
-
+            coleccionAsignaturas[0]=asignatura1;
+            coleccionAsignaturas[1]=asignatura2;
+            coleccionAsignaturas[2]=asignatura3;
             matricula1 = new Matricula(matricula);
             assertEquals(ID_MATRICULA, matricula1.getIdMatricula());
             assertEquals(CURSO_ACADEMICO, matricula1.getCursoAcademico());
@@ -134,7 +136,7 @@ public class MatriculaTest {
             assertEquals(alumno, matricula1.getAlumno(),ALUMNO_NO_ESPERADO);
             assertEquals(coleccionAsignaturas[0], matricula1.getColeccionAsignaturas()[0],ASIGNATURA_NO_ESPERADA);
             assertEquals(coleccionAsignaturas[1], matricula1.getColeccionAsignaturas()[1],ASIGNATURA_NO_ESPERADA);
-            assertEquals(coleccionAsignaturas[2], matricula1.getColeccionAsignaturas()[2],ASIGNATURA_NO_ESPERADA);;
+            assertEquals(coleccionAsignaturas[2], matricula1.getColeccionAsignaturas()[2],ASIGNATURA_NO_ESPERADA);
 
         } catch (Exception e) {
             fail(ERROR_NO_EXCEPCION);
@@ -287,19 +289,19 @@ public class MatriculaTest {
         }
 
         try {
-            Asignatura[] coleccionAsignaturas=new Asignatura[6];
-            coleccionAsignaturas[0]=asignatura1;
-            coleccionAsignaturas[1]=asignatura2;
-            coleccionAsignaturas[2]=asignatura3;
-            coleccionAsignaturas[3]=asignatura4;
-            coleccionAsignaturas[4]=asignatura5;
-            coleccionAsignaturas[5]=asignatura6;
+                Asignatura[] coleccionAsignaturas=new Asignatura[6];
+                coleccionAsignaturas[0]=asignatura1;
+                coleccionAsignaturas[1]=asignatura2;
+                coleccionAsignaturas[2]=asignatura3;
+                coleccionAsignaturas[3]=asignatura4;
+                coleccionAsignaturas[4]=asignatura5;
+                coleccionAsignaturas[5]=asignatura6;
 
-            matricula = new Matricula(ID_MATRICULA, CURSO_ACADEMICO, FECHA_MATRICULACION, alumno, coleccionAsignaturas);
-            fail(ERROR_EXCEPCION);
-        } catch (OperationNotSupportedException e) {
-            assertEquals(ERROR_MATRICULA_SUPERA_LIMITE_HORAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
-            assertNull(matricula, OBJETO_DEBERIA_SER_NULO);
+                matricula = new Matricula(ID_MATRICULA, CURSO_ACADEMICO, FECHA_MATRICULACION, alumno, coleccionAsignaturas);
+                fail(ERROR_EXCEPCION);
+            } catch (OperationNotSupportedException e) {
+                assertEquals(ERROR_MATRICULA_SUPERA_LIMITE_HORAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
+                assertNull(matricula, OBJETO_DEBERIA_SER_NULO);
         } catch (Exception e) {
             fail(TIPO_EXCEPCION_NO_CORRECTA);
         }
@@ -440,5 +442,5 @@ public class MatriculaTest {
 
 
     }
-*/
+
 }

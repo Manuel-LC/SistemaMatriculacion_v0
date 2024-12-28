@@ -3,7 +3,6 @@ package org.iesalandalus.programacion.matriculacion.dominio;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +11,7 @@ public class Alumno {
     private static final String ER_TELEFONO = "[0-9]{9}";
     private static final String ER_CORREO = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final String ER_DNI = "([0-9]{8})([a-zA-Z])";
-    public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final String FORMATO_FECHA = "dd/MM/yyyy";;
     private static final String ER_NIA = "[a-z]{4}+[0-9]{3}";
     private static final int MIN_EDAD_ALUMNADO = 16;
 
@@ -223,12 +222,12 @@ public class Alumno {
 
     public String imprimir() {
         return "Número de Identificación del Alumnado (NIA)=" + nia + " nombre=" + nombre + " (" + getIniciales() + "), " +
-                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" + fechaNacimiento.format(FORMATO_FECHA);
+                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" + fechaNacimiento.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA));
     }
 
     @Override
     public String toString() {
         return "Número de Identificación del Alumnado (NIA)=" + nia + " nombre=" + nombre + " (" + getIniciales() + "), " +
-                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" + fechaNacimiento.format(FORMATO_FECHA);
+                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" + fechaNacimiento.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA));
     }
 }
