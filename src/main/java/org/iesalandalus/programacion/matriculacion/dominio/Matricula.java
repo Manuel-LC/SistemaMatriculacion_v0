@@ -101,9 +101,6 @@ public class Matricula {
     }
 
     public void setFechaAnulacion(LocalDate fechaAnulacion) {
-        if (fechaAnulacion == null) {
-            throw new NullPointerException("aaaaaaaaaaa");
-        }
         if (ChronoUnit.MONTHS.between(this.fechaMatriculacion, fechaAnulacion) > MAXIMO_MESES_ANTERIOR_ANULACION) {
             throw new IllegalArgumentException("ERROR: La fecha de anulación no puede superar los 6 meses.");
         }
