@@ -10,7 +10,7 @@ public enum EspecialidadProfesorado {
     }
 
     public String imprimir() {
-        return String.format("dígito.-" + cadenaAMostrar);
+        return String.format("%d .- %s", this.ordinal(), this.cadenaAMostrar);
     }
 
     @Override
