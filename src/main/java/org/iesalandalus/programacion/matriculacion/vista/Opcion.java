@@ -31,6 +31,6 @@ public enum Opcion {
 
     @Override
     public String toString() {
-        return String.format("%d .- %s", this.ordinal(), this.cadenaAMostrar);
+        return String.format("%d.- %s", this.ordinal(), this.cadenaAMostrar);
     }
 }

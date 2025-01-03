@@ -6,8 +6,8 @@ import javax.naming.OperationNotSupportedException;
 
 public class CiclosFormativos {
 
-    private int capacidad;
-    private int tamano;
+    private static int capacidad;
+    private static int tamano;
     private static CicloFormativo[] coleccionCiclosFormativos;
 
     public CiclosFormativos(int capacidad) {
@@ -20,11 +20,11 @@ public class CiclosFormativos {
         this.coleccionCiclosFormativos = new CicloFormativo[capacidad];
     }
 
-    public CicloFormativo[] get() {
+    public static CicloFormativo[] get() {
         return copiaProfundaCiclosFormativos(coleccionCiclosFormativos);
     }
 
-    private CicloFormativo[] copiaProfundaCiclosFormativos(CicloFormativo[] cicloFormativos) {
+    private static CicloFormativo[] copiaProfundaCiclosFormativos(CicloFormativo[] cicloFormativos) {
         CicloFormativo[] copiaCiclosFormativos = new CicloFormativo[capacidad];
         for (int i = 0; i < capacidad; i++) {
             if (cicloFormativos[i] != null) {
@@ -43,7 +43,7 @@ public class CiclosFormativos {
         return capacidad;
     }
 
-    public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public static void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         if (cicloFormativo == null) {
             throw new NullPointerException("ERROR: No se puede insertar un ciclo formativo nulo.");
         }
@@ -61,7 +61,7 @@ public class CiclosFormativos {
         }
     }
 
-    private int buscarIndice(CicloFormativo alumno) {
+    private static int buscarIndice(CicloFormativo alumno) {
         int indice = -1;
         boolean encontrado = false;
 
@@ -83,7 +83,7 @@ public class CiclosFormativos {
         return indice >= capacidad;
     }
 
-    public CicloFormativo buscar(CicloFormativo cicloFormativo) {
+    public static CicloFormativo buscar(CicloFormativo cicloFormativo) {
         int i;
         boolean encontrado = false;
 
@@ -101,7 +101,7 @@ public class CiclosFormativos {
         }
     }
 
-    public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public static void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         if (cicloFormativo == null) {
             throw new NullPointerException("ERROR: No se puede borrar un ciclo formativo nulo.");
         }
@@ -115,7 +115,7 @@ public class CiclosFormativos {
         }
     }
 
-    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
+    private static void desplazarUnaPosicionHaciaIzquierda(int indice) {
         int i;
 
         for (i = indice; i < capacidad - 1 && coleccionCiclosFormativos[i] != null; i++) {

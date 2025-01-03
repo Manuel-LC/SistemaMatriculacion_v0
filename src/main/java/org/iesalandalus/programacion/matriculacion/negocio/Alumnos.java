@@ -6,8 +6,8 @@ import javax.naming.OperationNotSupportedException;
 
 public class Alumnos {
 
-    private int capacidad;
-    private int tamano;
+    private static int capacidad;
+    private static int tamano;
     private static Alumno[] coleccionAlumnos;
 
     public Alumnos(int capacidad) {
@@ -20,11 +20,11 @@ public class Alumnos {
         this.coleccionAlumnos = new Alumno[capacidad];
     }
 
-    public Alumno[] get() {
+    public static Alumno[] get() {
         return copiaProfundaAlumnos(coleccionAlumnos);
     }
 
-    private Alumno[] copiaProfundaAlumnos(Alumno[] alumnos) {
+    private static Alumno[] copiaProfundaAlumnos(Alumno[] alumnos) {
         Alumno[] copiaAlumnos = new Alumno[capacidad];
         for (int i = 0; i < capacidad; i++) {
             if (alumnos[i] != null) {
@@ -43,7 +43,7 @@ public class Alumnos {
         return capacidad;
     }
 
-    public void insertar(Alumno alumno) throws OperationNotSupportedException {
+    public static void insertar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null) {
             throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
         }
@@ -61,7 +61,7 @@ public class Alumnos {
         }
     }
 
-    private int buscarIndice(Alumno alumno) {
+    private static int buscarIndice(Alumno alumno) {
         int indice = -1;
         boolean encontrado = false;
 
@@ -83,7 +83,7 @@ public class Alumnos {
         return indice >= capacidad;
     }
 
-    public Alumno buscar(Alumno alumno) {
+    public static Alumno buscar(Alumno alumno) {
         int i;
         boolean encontrado = false;
 
@@ -101,7 +101,7 @@ public class Alumnos {
         }
     }
 
-    public void borrar(Alumno alumno) throws OperationNotSupportedException {
+    public static void borrar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null) {
             throw new NullPointerException("ERROR: No se puede borrar un alumno nulo.");
         }
@@ -115,7 +115,7 @@ public class Alumnos {
         }
     }
 
-    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
+    private static void desplazarUnaPosicionHaciaIzquierda(int indice) {
         int i;
 
         for (i = indice; i < capacidad - 1 && coleccionAlumnos[i] != null; i++) {

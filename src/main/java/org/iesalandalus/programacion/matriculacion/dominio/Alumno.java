@@ -222,12 +222,14 @@ public class Alumno {
 
     public String imprimir() {
         return "Número de Identificación del Alumnado (NIA)=" + nia + " nombre=" + nombre + " (" + getIniciales() + "), " +
-                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" + fechaNacimiento.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA));
+                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" +
+                fechaNacimiento.format(DateTimeFormatter.ofPattern(FORMATO_FECHA));
     }
 
     @Override
     public String toString() {
         return "Número de Identificación del Alumnado (NIA)=" + nia + " nombre=" + nombre + " (" + getIniciales() + "), " +
-                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" + fechaNacimiento.format(DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA));
+                "DNI=" + dni + ", correo=" + correo + ", teléfono=" + telefono + ", fecha nacimiento=" +
+                fechaNacimiento.format(DateTimeFormatter.ofPattern(FORMATO_FECHA));
     }
 }

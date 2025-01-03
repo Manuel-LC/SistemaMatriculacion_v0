@@ -2,15 +2,17 @@ package org.iesalandalus.programacion.matriculacion.negocio;
 
 
 import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
 
 import javax.naming.OperationNotSupportedException;
+import java.util.Arrays;
 
 public class Matriculas {
 
-    private int capacidad;
-    private int tamano;
+    private static int capacidad;
+    private static int tamano;
     private static Matricula[] coleccionMatriculas;
 
     public Matriculas(int capacidad) {
@@ -23,12 +25,13 @@ public class Matriculas {
         this.coleccionMatriculas = new Matricula[capacidad];
     }
 
-    public Matricula[] get() throws OperationNotSupportedException {
+    public static Matricula[] get() throws OperationNotSupportedException {
         return copiaProfundaMatriculas(coleccionMatriculas);
     }
 
-    private Matricula[] copiaProfundaMatriculas(Matricula[] alumnos) {
+    private static Matricula[] copiaProfundaMatriculas(Matricula[] alumnos) {
         Matricula[] copiaMatriculas = new Matricula[capacidad];
+
         for (int i = 0; i < capacidad; i++) {
             if (alumnos[i] != null) {
                 copiaMatriculas[i] = new Matricula(alumnos[i]);
@@ -46,7 +49,7 @@ public class Matriculas {
         return capacidad;
     }
 
-    public void insertar(Matricula matricula) throws OperationNotSupportedException {
+    public static void insertar(Matricula matricula) throws OperationNotSupportedException {
         if (matricula == null) {
             throw new NullPointerException("ERROR: No se puede insertar una matrícula nula.");
         }
@@ -64,7 +67,7 @@ public class Matriculas {
         }
     }
 
-    private int buscarIndice(Matricula matricula) {
+    private static int buscarIndice(Matricula matricula) {
         int indice = -1;
         boolean encontrado = false;
 
@@ -86,7 +89,7 @@ public class Matriculas {
         return indice >= capacidad;
     }
 
-    public Matricula buscar(Matricula matricula) {
+    public static Matricula buscar(Matricula matricula) {
         int i;
         boolean encontrado = false;
 
@@ -104,7 +107,7 @@ public class Matriculas {
         }
     }
 
-    public void borrar(Matricula matricula) throws OperationNotSupportedException {
+    public static void borrar(Matricula matricula) throws OperationNotSupportedException {
         if (matricula == null) {
             throw new NullPointerException("ERROR: No se puede borrar una matrícula nula.");
         }
@@ -118,7 +121,7 @@ public class Matriculas {
         }
     }
 
-    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
+    private static void desplazarUnaPosicionHaciaIzquierda(int indice) {
         int i;
 
         for (i = indice; i < capacidad - 1 && coleccionMatriculas[i] != null; i++) {
@@ -127,33 +130,43 @@ public class Matriculas {
         coleccionMatriculas[i] = null;
     }
 
-    public Matricula[] get(Alumno alumno) {
+    public static Matricula[] get(Alumno alumno) {
         Matricula[] coleccionMatriculasAlumno = new Matricula[capacidad];
+
         for (int i = 0; i < capacidad; i++) {
-            if (coleccionMatriculas[i].getAlumno().equals(alumno)) {
-                coleccionMatriculasAlumno[i] = new Matricula(coleccionMatriculas[i]);
+            if (coleccionMatriculas[i] != null && coleccionMatriculas[i].getAlumno().equals(alumno)) {
+                coleccionMatriculasAlumno[i] = coleccionMatriculas[i];
             }
         }
         return coleccionMatriculasAlumno;
     }
 
-    public Matricula[] get(String cursoAcademico) {
+    public static Matricula[] get(String cursoAcademico) {
         Matricula[] coleccionMatriculasCurso = new Matricula[capacidad];
+
         for (int i = 0; i < capacidad; i++) {
-            if (coleccionMatriculas[i].getCursoAcademico().equals(cursoAcademico)) {
-                coleccionMatriculasCurso[i] = new Matricula(coleccionMatriculas[i]);
+            if (coleccionMatriculas[i] != null && coleccionMatriculas[i].getCursoAcademico().equals(cursoAcademico)) {
+                coleccionMatriculasCurso[i] = coleccionMatriculas[i];
             }
         }
         return coleccionMatriculasCurso;
     }
 
-    public Matricula[] get(CicloFormativo cicloFormativo) {
+    public static Matricula[] get(CicloFormativo cicloFormativo) {
         Matricula[] coleccionMatriculasCiclo = new Matricula[capacidad];
+        int indice = 0;
+
         for (int i = 0; i < capacidad; i++) {
-            if (coleccionMatriculas[i].equals(cicloFormativo)) {
-                coleccionMatriculasCiclo[i] = new Matricula(coleccionMatriculas[i]);
+            if (coleccionMatriculas[i] != null) {
+                for (Asignatura asignatura : coleccionMatriculas[i].getColeccionAsignaturas()) {
+                    if (asignatura != null && asignatura.getCicloFormativo().equals(cicloFormativo)) {
+                        coleccionMatriculasCiclo[indice++] = coleccionMatriculas[i];
+                        break;
+                    }
+                }
             }
         }
-        return coleccionMatriculasCiclo;
+
+        return Arrays.copyOf(coleccionMatriculasCiclo, indice);
     }
 }

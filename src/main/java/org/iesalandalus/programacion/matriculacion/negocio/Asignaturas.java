@@ -7,8 +7,8 @@ import javax.naming.OperationNotSupportedException;
 
 public class Asignaturas {
 
-    private int capacidad;
-    private int tamano;
+    private static int capacidad;
+    private static int tamano;
     private static Asignatura[] coleccionAsignaturas;
 
     public Asignaturas(int capacidad) {
@@ -21,11 +21,11 @@ public class Asignaturas {
         this.coleccionAsignaturas = new Asignatura[capacidad];
     }
 
-    public Asignatura[] get() {
+    public static Asignatura[] get() {
         return copiaProfundaAsignaturas(coleccionAsignaturas);
     }
 
-    private Asignatura[] copiaProfundaAsignaturas(Asignatura[] asignaturas) {
+    private static Asignatura[] copiaProfundaAsignaturas(Asignatura[] asignaturas) {
         Asignatura[] copiaAsignaturas = new Asignatura[capacidad];
         for (int i = 0; i < capacidad; i++) {
             if (asignaturas[i] != null) {
@@ -44,7 +44,7 @@ public class Asignaturas {
         return capacidad;
     }
 
-    public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
+    public static void insertar(Asignatura asignatura) throws OperationNotSupportedException {
         if (asignatura == null) {
             throw new NullPointerException("ERROR: No se puede insertar una asignatura nula.");
         }
@@ -62,7 +62,7 @@ public class Asignaturas {
         }
     }
 
-    private int buscarIndice(Asignatura alumno) {
+    private static int buscarIndice(Asignatura alumno) {
         int indice = -1;
         boolean encontrado = false;
 
@@ -84,7 +84,7 @@ public class Asignaturas {
         return indice >= capacidad;
     }
 
-    public Asignatura buscar(Asignatura cicloFormativo) {
+    public static Asignatura buscar(Asignatura cicloFormativo) {
         int i;
         boolean encontrado = false;
 
@@ -102,7 +102,7 @@ public class Asignaturas {
         }
     }
 
-    public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
+    public static void borrar(Asignatura asignatura) throws OperationNotSupportedException {
         if (asignatura == null) {
             throw new NullPointerException("ERROR: No se puede borrar una asignatura nula.");
         }
@@ -116,7 +116,7 @@ public class Asignaturas {
         }
     }
 
-    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
+    private static void desplazarUnaPosicionHaciaIzquierda(int indice) {
         int i;
 
         for (i = indice; i < capacidad - 1 && coleccionAsignaturas[i] != null; i++) {
