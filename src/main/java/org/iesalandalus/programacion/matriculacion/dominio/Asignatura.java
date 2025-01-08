@@ -147,7 +147,7 @@ public class Asignatura {
     public String imprimir() {
         return "Código asignatura=" + codigo + ", nombre asignatura=" + nombre + ", ciclo formativo=" +
                 "Código ciclo formativo=" + cicloFormativo.getCodigo() + ", nombre ciclo formativo=" +
-                cicloFormativo.getNombre() + " ";
+                cicloFormativo.getNombre();
     }
 
     @Override

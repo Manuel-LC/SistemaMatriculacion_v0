@@ -7,7 +7,6 @@ public class CicloFormativo {
 
     private int codigo;
     private String familiaProfesional;
-    private String correo;
     private Grado grado;
     private String nombre;
     private int horas;
@@ -38,7 +37,7 @@ public class CicloFormativo {
 
     private void setCodigo(int codigo) {
         if (codigo < 1000 || codigo > 9999) {
-            throw new IllegalArgumentException("aeiou ");
+            throw new IllegalArgumentException("ERROR: El código de un ciclo formativo debe ser un número de 4 cifras.");
         }
 
         this.codigo = codigo;

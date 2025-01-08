@@ -15,20 +15,21 @@ public class Alumnos {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
 
-        this.capacidad = capacidad;
-        this.tamano = 0;
-        this.coleccionAlumnos = new Alumno[capacidad];
+        Alumnos.capacidad = capacidad;
+        tamano = 0;
+        coleccionAlumnos = new Alumno[capacidad];
     }
 
     public static Alumno[] get() {
-        return copiaProfundaAlumnos(coleccionAlumnos);
+        return copiaProfundaAlumnos();
     }
 
-    private static Alumno[] copiaProfundaAlumnos(Alumno[] alumnos) {
+    private static Alumno[] copiaProfundaAlumnos() {
         Alumno[] copiaAlumnos = new Alumno[capacidad];
-        for (int i = 0; i < capacidad; i++) {
-            if (alumnos[i] != null) {
-                copiaAlumnos[i] = new Alumno(alumnos[i]);
+
+        for (int i = 0; i < tamano; i++) {
+            if (coleccionAlumnos[i] != null) {
+                copiaAlumnos[i] = new Alumno(coleccionAlumnos[i]);
             }
         }
 
@@ -95,7 +96,7 @@ public class Alumnos {
         }
 
         if (encontrado == true) {
-            return copiaProfundaAlumnos(coleccionAlumnos)[i - 1];
+            return copiaProfundaAlumnos()[i - 1];
         } else {
             return null;
         }
@@ -107,7 +108,7 @@ public class Alumnos {
         }
 
         int i = buscarIndice(alumno);
-        if (alumno == coleccionAlumnos[i]) {
+        if (alumno.getDni().equals(coleccionAlumnos[i].getDni())) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {

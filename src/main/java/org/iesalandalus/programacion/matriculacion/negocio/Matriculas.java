@@ -7,7 +7,6 @@ import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
 
 import javax.naming.OperationNotSupportedException;
-import java.util.Arrays;
 
 public class Matriculas {
 
@@ -20,21 +19,21 @@ public class Matriculas {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
 
-        this.capacidad = capacidad;
-        this.tamano = 0;
-        this.coleccionMatriculas = new Matricula[capacidad];
+        Matriculas.capacidad = capacidad;
+        tamano = 0;
+        coleccionMatriculas = new Matricula[capacidad];
     }
 
     public static Matricula[] get() throws OperationNotSupportedException {
-        return copiaProfundaMatriculas(coleccionMatriculas);
+        return copiaProfundaMatriculas();
     }
 
-    private static Matricula[] copiaProfundaMatriculas(Matricula[] alumnos) {
+    private static Matricula[] copiaProfundaMatriculas() {
         Matricula[] copiaMatriculas = new Matricula[capacidad];
 
         for (int i = 0; i < capacidad; i++) {
-            if (alumnos[i] != null) {
-                copiaMatriculas[i] = new Matricula(alumnos[i]);
+            if (coleccionMatriculas[i] != null) {
+                copiaMatriculas[i] = new Matricula(coleccionMatriculas[i]);
             }
         }
 
@@ -101,7 +100,7 @@ public class Matriculas {
         }
 
         if (encontrado == true) {
-            return copiaProfundaMatriculas(coleccionMatriculas)[i - 1];
+            return copiaProfundaMatriculas()[i - 1];
         } else {
             return null;
         }
@@ -113,7 +112,7 @@ public class Matriculas {
         }
 
         int i = buscarIndice(matricula);
-        if (matricula == coleccionMatriculas[i]) {
+        if (matricula.getIdMatricula() == coleccionMatriculas[i].getIdMatricula()) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {
@@ -130,8 +129,8 @@ public class Matriculas {
         coleccionMatriculas[i] = null;
     }
 
-    public static Matricula[] get(Alumno alumno) {
-        Matricula[] coleccionMatriculasAlumno = new Matricula[capacidad];
+    public static Matricula[] get(Alumno alumno) throws OperationNotSupportedException {
+        Matricula[] coleccionMatriculasAlumno = get();
 
         for (int i = 0; i < capacidad; i++) {
             if (coleccionMatriculas[i] != null && coleccionMatriculas[i].getAlumno().equals(alumno)) {
@@ -141,8 +140,8 @@ public class Matriculas {
         return coleccionMatriculasAlumno;
     }
 
-    public static Matricula[] get(String cursoAcademico) {
-        Matricula[] coleccionMatriculasCurso = new Matricula[capacidad];
+    public static Matricula[] get(String cursoAcademico) throws OperationNotSupportedException {
+        Matricula[] coleccionMatriculasCurso = get();
 
         for (int i = 0; i < capacidad; i++) {
             if (coleccionMatriculas[i] != null && coleccionMatriculas[i].getCursoAcademico().equals(cursoAcademico)) {
@@ -152,21 +151,24 @@ public class Matriculas {
         return coleccionMatriculasCurso;
     }
 
-    public static Matricula[] get(CicloFormativo cicloFormativo) {
-        Matricula[] coleccionMatriculasCiclo = new Matricula[capacidad];
+    public static Matricula[] get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+        Matricula[] coleccionMatriculasCiclo = get();
         int indice = 0;
+        Asignatura[] asignaturasMatricula = Matricula.getColeccionAsignaturas();
+
+        if (cicloFormativo == null) {
+            throw new IllegalArgumentException("ERROR: El ciclo formativo no puede ser nulo.");
+        }
 
         for (int i = 0; i < capacidad; i++) {
             if (coleccionMatriculas[i] != null) {
-                for (Asignatura asignatura : coleccionMatriculas[i].getColeccionAsignaturas()) {
-                    if (asignatura != null && asignatura.getCicloFormativo().equals(cicloFormativo)) {
-                        coleccionMatriculasCiclo[indice++] = coleccionMatriculas[i];
-                        break;
-                    }
+                if (asignaturasMatricula[i] != null && asignaturasMatricula[i].getCicloFormativo().equals(cicloFormativo)) {
+                    coleccionMatriculasCiclo[indice++] = coleccionMatriculas[i];
                 }
+
             }
         }
 
-        return Arrays.copyOf(coleccionMatriculasCiclo, indice);
+        return coleccionMatriculasCiclo;
     }
 }

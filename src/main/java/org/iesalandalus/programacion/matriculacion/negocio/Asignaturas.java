@@ -16,20 +16,21 @@ public class Asignaturas {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
 
-        this.capacidad = capacidad;
-        this.tamano = 0;
-        this.coleccionAsignaturas = new Asignatura[capacidad];
+        Asignaturas.capacidad = capacidad;
+        tamano = 0;
+        coleccionAsignaturas = new Asignatura[capacidad];
     }
 
     public static Asignatura[] get() {
-        return copiaProfundaAsignaturas(coleccionAsignaturas);
+        return copiaProfundaAsignaturas();
     }
 
-    private static Asignatura[] copiaProfundaAsignaturas(Asignatura[] asignaturas) {
+    private static Asignatura[] copiaProfundaAsignaturas() {
         Asignatura[] copiaAsignaturas = new Asignatura[capacidad];
+
         for (int i = 0; i < capacidad; i++) {
-            if (asignaturas[i] != null) {
-                copiaAsignaturas[i] = new Asignatura(asignaturas[i]);
+            if (coleccionAsignaturas[i] != null) {
+                copiaAsignaturas[i] = new Asignatura(coleccionAsignaturas[i]);
             }
         }
 
@@ -96,7 +97,7 @@ public class Asignaturas {
         }
 
         if (encontrado == true) {
-            return copiaProfundaAsignaturas(coleccionAsignaturas)[i - 1];
+            return copiaProfundaAsignaturas()[i - 1];
         } else {
             return null;
         }
@@ -108,7 +109,7 @@ public class Asignaturas {
         }
 
         int i = buscarIndice(asignatura);
-        if (asignatura == coleccionAsignaturas[i]) {
+        if (asignatura.getCodigo().equals(coleccionAsignaturas[i].getCodigo())) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {

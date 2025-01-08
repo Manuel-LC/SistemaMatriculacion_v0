@@ -15,20 +15,21 @@ public class CiclosFormativos {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
 
-        this.capacidad = capacidad;
-        this.tamano = 0;
-        this.coleccionCiclosFormativos = new CicloFormativo[capacidad];
+        CiclosFormativos.capacidad = capacidad;
+        tamano = 0;
+        coleccionCiclosFormativos = new CicloFormativo[capacidad];
     }
 
-    public static CicloFormativo[] get() {
-        return copiaProfundaCiclosFormativos(coleccionCiclosFormativos);
+    public CicloFormativo[] get() {
+        return copiaProfundaCiclosFormativos();
     }
 
-    private static CicloFormativo[] copiaProfundaCiclosFormativos(CicloFormativo[] cicloFormativos) {
+    private static CicloFormativo[] copiaProfundaCiclosFormativos() {
         CicloFormativo[] copiaCiclosFormativos = new CicloFormativo[capacidad];
+
         for (int i = 0; i < capacidad; i++) {
-            if (cicloFormativos[i] != null) {
-                copiaCiclosFormativos[i] = new CicloFormativo(cicloFormativos[i]);
+            if (coleccionCiclosFormativos[i] != null) {
+                copiaCiclosFormativos[i] = new CicloFormativo(coleccionCiclosFormativos[i]);
             }
         }
 
@@ -95,7 +96,7 @@ public class CiclosFormativos {
         }
 
         if (encontrado == true) {
-            return copiaProfundaCiclosFormativos(coleccionCiclosFormativos)[i - 1];
+            return copiaProfundaCiclosFormativos()[i - 1];
         } else {
             return null;
         }
@@ -107,7 +108,7 @@ public class CiclosFormativos {
         }
 
         int i = buscarIndice(cicloFormativo);
-        if (cicloFormativo == coleccionCiclosFormativos[i]) {
+        if (cicloFormativo.getCodigo() == coleccionCiclosFormativos[i].getCodigo()) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {

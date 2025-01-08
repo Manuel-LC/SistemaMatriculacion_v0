@@ -38,8 +38,9 @@ public class Matricula {
         this.idMatricula = matricula.idMatricula;
         this.cursoAcademico = matricula.cursoAcademico;
         this.fechaMatriculacion = matricula.fechaMatriculacion;
+        this.fechaAnulacion = getFechaAnulacion();
         this.alumno = matricula.alumno;
-        coleccionAsignaturas = matricula.getColeccionAsignaturas();
+        coleccionAsignaturas = getColeccionAsignaturas();
     }
 
     public int getIdMatricula() {
@@ -126,11 +127,11 @@ public class Matricula {
         this.alumno = alumno;
     }
 
-    public Asignatura[] getColeccionAsignaturas() {
+    public static Asignatura[] getColeccionAsignaturas() {
         return coleccionAsignaturas;
     }
 
-    public void setColeccionAsignaturas(Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
+    public  void setColeccionAsignaturas(Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
         if (coleccionAsignaturas == null) {
             throw new NullPointerException("ERROR: La lista de asignaturas de una matrícula no puede ser nula.");
         }
@@ -144,7 +145,7 @@ public class Matricula {
         Matricula.coleccionAsignaturas = coleccionAsignaturas;
     }
 
-    private boolean superaMaximoNumeroHorasMatricula(Asignatura[] asignaturasMatricula) {
+    private static boolean superaMaximoNumeroHorasMatricula(Asignatura[] asignaturasMatricula) {
         int totalHoras = 0;
 
         for (Asignatura asignatura : asignaturasMatricula) {
@@ -162,7 +163,7 @@ public class Matricula {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Matricula matricula = (Matricula) o;
-        return Objects.equals(idMatricula, matricula.idMatricula);
+        return Objects.equals(this.idMatricula, matricula.idMatricula);
     }
 
     @Override
@@ -179,9 +180,9 @@ public class Matricula {
     @Override
     public String toString() {
 
-        if (fechaAnulacion == null) {
+        StringBuilder asignaturas = new StringBuilder();
 
-            StringBuilder asignaturas = new StringBuilder();
+        if (fechaAnulacion == null) {
 
             for (Asignatura asignatura : coleccionAsignaturas) {
                 if (asignatura != null)
@@ -194,7 +195,6 @@ public class Matricula {
                     alumno.imprimir(), asignaturas);
         } else {
 
-            StringBuilder asignaturas = new StringBuilder();
             for (Asignatura asignatura : coleccionAsignaturas) {
                 if (asignatura != null)
                     asignaturas.append(asignatura.imprimir());

@@ -128,7 +128,7 @@ public class Alumno {
         if (!correo.matches(ER_CORREO) || correo.isBlank()) {
             throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
         }
-        this.correo = correo;
+        this.correo = correo.toLowerCase();
     }
 
     public String getDni() {
