@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.matriculacion.negocio;
 
-
 import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
 
 import javax.naming.OperationNotSupportedException;
@@ -109,7 +108,7 @@ public class Asignaturas {
         }
 
         int i = buscarIndice(asignatura);
-        if (asignatura.getCodigo().equals(coleccionAsignaturas[i].getCodigo())) {
+        if (asignatura.equals(coleccionAsignaturas[i])) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {

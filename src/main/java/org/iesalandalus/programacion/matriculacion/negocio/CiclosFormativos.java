@@ -108,7 +108,7 @@ public class CiclosFormativos {
         }
 
         int i = buscarIndice(cicloFormativo);
-        if (cicloFormativo.getCodigo() == coleccionCiclosFormativos[i].getCodigo()) {
+        if (cicloFormativo.equals(coleccionCiclosFormativos[i])) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {

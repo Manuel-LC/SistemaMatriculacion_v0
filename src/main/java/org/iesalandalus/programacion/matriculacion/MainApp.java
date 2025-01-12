@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.matriculacion;
 
-
 import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
@@ -14,10 +13,10 @@ import java.time.LocalDate;
 
 public class MainApp {
     public static final int CAPACIDAD=3;
-    private static Alumnos alumnos = new Alumnos(CAPACIDAD);
-    private static Asignaturas asignaturas = new Asignaturas(CAPACIDAD);
-    private static CiclosFormativos ciclosFormativos = new CiclosFormativos(CAPACIDAD);
-    private static Matriculas matriculas = new Matriculas(CAPACIDAD);
+    private static final Alumnos alumnos = new Alumnos(CAPACIDAD);
+    private static final Asignaturas asignaturas = new Asignaturas(CAPACIDAD);
+    private static final CiclosFormativos ciclosFormativos = new CiclosFormativos(CAPACIDAD);
+    private static final Matriculas matriculas = new Matriculas(CAPACIDAD);
 
     public static void main(String[] args) {
         Opcion opcion = Opcion.SALIR;
@@ -82,7 +81,6 @@ public class MainApp {
         try {
             Alumno alumno = Consola.getAlumnoPorDni();
             alumno = Alumnos.buscar(alumno);
-            System.out.println();
 
             if (alumno != null) {
                 System.out.println("Alumno encontrado:");
@@ -280,7 +278,7 @@ public class MainApp {
                 matricula.setFechaAnulacion(fechaAnulacion);
                 Matriculas.borrar(matricula);
                 System.out.println();
-                System.out.println("Matrícula anulada correctamente.");
+                System.out.println("Matrícula anulada correctamente el " + fechaAnulacion + ".");
             } else {
                 System.out.println("No existe ninguna matrícula con ese identificador.");
             }
@@ -291,7 +289,7 @@ public class MainApp {
     }
 
     private static void mostrarMatriculas() throws OperationNotSupportedException {
-        Matricula[] listaMatriculas = Matriculas.get();
+        Matricula[] listaMatriculas = matriculas.get();
 
         if (listaMatriculas[0] == null) {
             System.out.println("No hay matrículas registradas.");
@@ -315,7 +313,7 @@ public class MainApp {
                 return;
             }
 
-            Matricula[] matriculasAlumno = Matriculas.get(alumno);
+            Matricula[] matriculasAlumno = matriculas.get(alumno);
 
             if (matriculasAlumno[0] == null) {
                 System.out.println("El alumno no tiene matrículas registradas.");
@@ -347,7 +345,7 @@ public class MainApp {
                 return;
             }
 
-            Matricula[] matriculasCiclo = Matriculas.get(cicloFormativo);
+            Matricula[] matriculasCiclo = matriculas.get(cicloFormativo);
 
             if (matriculasCiclo[0] == null) {
                 System.out.println("El ciclo formativo no tiene matrículas registradas.");
@@ -371,7 +369,7 @@ public class MainApp {
             System.out.println("Introduce el curso academico:");
             String cursoAcademico = Entrada.cadena();
 
-            Matricula[] matriculasCurso = Matriculas.get(cursoAcademico);
+            Matricula[] matriculasCurso = matriculas.get(cursoAcademico);
 
             if (matriculasCurso[0] == null) {
                 System.out.println("No hay matrículas registradas para el curso académico " + cursoAcademico + ".");

@@ -77,11 +77,11 @@ public class Alumnos {
     }
 
     private boolean tamanoSuperado(int indice) {
-        return indice >= tamano;
+        return indice > tamano;
     }
 
     private boolean capacidadSuperada(int indice) {
-        return indice >= capacidad;
+        return indice > capacidad;
     }
 
     public static Alumno buscar(Alumno alumno) {
@@ -108,7 +108,7 @@ public class Alumnos {
         }
 
         int i = buscarIndice(alumno);
-        if (alumno.getDni().equals(coleccionAlumnos[i].getDni())) {
+        if (alumno.equals(coleccionAlumnos[i])) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {

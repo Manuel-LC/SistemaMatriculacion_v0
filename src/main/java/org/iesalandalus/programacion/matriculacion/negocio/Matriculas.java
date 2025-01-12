@@ -24,11 +24,11 @@ public class Matriculas {
         coleccionMatriculas = new Matricula[capacidad];
     }
 
-    public static Matricula[] get() throws OperationNotSupportedException {
+    public Matricula[] get() throws OperationNotSupportedException {
         return copiaProfundaMatriculas();
     }
 
-    private static Matricula[] copiaProfundaMatriculas() {
+    private Matricula[] copiaProfundaMatriculas() {
         Matricula[] copiaMatriculas = new Matricula[capacidad];
 
         for (int i = 0; i < capacidad; i++) {
@@ -100,7 +100,7 @@ public class Matriculas {
         }
 
         if (encontrado == true) {
-            return copiaProfundaMatriculas()[i - 1];
+            return new Matricula(coleccionMatriculas[i - 1]);
         } else {
             return null;
         }
@@ -112,7 +112,7 @@ public class Matriculas {
         }
 
         int i = buscarIndice(matricula);
-        if (matricula.getIdMatricula() == coleccionMatriculas[i].getIdMatricula()) {
+        if (matricula.equals(coleccionMatriculas[i])) {
             desplazarUnaPosicionHaciaIzquierda(i);
             tamano--;
         } else {
@@ -129,32 +129,33 @@ public class Matriculas {
         coleccionMatriculas[i] = null;
     }
 
-    public static Matricula[] get(Alumno alumno) throws OperationNotSupportedException {
-        Matricula[] coleccionMatriculasAlumno = get();
+    public Matricula[] get(Alumno alumno) throws OperationNotSupportedException {
+        Matricula[] coleccionMatriculasAlumno = new Matricula[capacidad];
+        int indice = 0;
 
         for (int i = 0; i < capacidad; i++) {
             if (coleccionMatriculas[i] != null && coleccionMatriculas[i].getAlumno().equals(alumno)) {
-                coleccionMatriculasAlumno[i] = coleccionMatriculas[i];
+                coleccionMatriculasAlumno[indice++] = coleccionMatriculas[i];
             }
         }
         return coleccionMatriculasAlumno;
     }
 
-    public static Matricula[] get(String cursoAcademico) throws OperationNotSupportedException {
-        Matricula[] coleccionMatriculasCurso = get();
+    public Matricula[] get(String cursoAcademico) throws OperationNotSupportedException {
+        Matricula[] coleccionMatriculasCurso = new Matricula[capacidad];
+        int indice = 0;
 
         for (int i = 0; i < capacidad; i++) {
             if (coleccionMatriculas[i] != null && coleccionMatriculas[i].getCursoAcademico().equals(cursoAcademico)) {
-                coleccionMatriculasCurso[i] = coleccionMatriculas[i];
+                coleccionMatriculasCurso[indice++] = coleccionMatriculas[i];
             }
         }
         return coleccionMatriculasCurso;
     }
 
-    public static Matricula[] get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-        Matricula[] coleccionMatriculasCiclo = get();
+    public Matricula[] get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+        Matricula[] coleccionMatriculasCiclo = new Matricula[capacidad];
         int indice = 0;
-        Asignatura[] asignaturasMatricula = Matricula.getColeccionAsignaturas();
 
         if (cicloFormativo == null) {
             throw new IllegalArgumentException("ERROR: El ciclo formativo no puede ser nulo.");
@@ -162,8 +163,14 @@ public class Matriculas {
 
         for (int i = 0; i < capacidad; i++) {
             if (coleccionMatriculas[i] != null) {
-                if (asignaturasMatricula[i] != null && asignaturasMatricula[i].getCicloFormativo().equals(cicloFormativo)) {
-                    coleccionMatriculasCiclo[indice++] = coleccionMatriculas[i];
+
+                Asignatura[] asignaturasMatricula = coleccionMatriculas[i].getColeccionAsignaturas();
+
+                for (Asignatura asignatura : asignaturasMatricula) {
+                    if (asignatura != null && asignatura.getCicloFormativo().equals(cicloFormativo)) {
+                        coleccionMatriculasCiclo[indice++] = coleccionMatriculas[i];
+                        break;
+                    }
                 }
 
             }

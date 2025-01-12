@@ -125,10 +125,14 @@ public class MatriculaTest {
     public void constructorCopiaValidoCopiaMatriculaCorrectamente() {
         Matricula matricula1;
         try {
+            coleccionAsignaturas[0] = asignatura1;
+            coleccionAsignaturas[1] = asignatura2;
+            coleccionAsignaturas[2] = asignatura3;
+
+            // Crear la instancia de matrícula
             Matricula matricula = new Matricula(ID_MATRICULA, CURSO_ACADEMICO, FECHA_MATRICULACION, alumno, coleccionAsignaturas);
-            coleccionAsignaturas[0]=asignatura1;
-            coleccionAsignaturas[1]=asignatura2;
-            coleccionAsignaturas[2]=asignatura3;
+
+            // Crear una copia de la matrícula
             matricula1 = new Matricula(matricula);
             assertEquals(ID_MATRICULA, matricula1.getIdMatricula());
             assertEquals(CURSO_ACADEMICO, matricula1.getCursoAcademico());

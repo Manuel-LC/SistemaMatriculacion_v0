@@ -294,6 +294,6 @@ public class Consola {
         System.out.print("Introduce el identificador de la matrícula: ");
         int idMatricula = Entrada.entero();
 
-        return new Matricula(idMatricula, "24-25", LocalDate.now().minusDays(10), new Alumno("Antonio rodríguez cuenca", "77241354V", "arc123@hotmail.com", "676873431", LocalDate.of(1999, 6, 14)), Matricula.getColeccionAsignaturas());
+        return new Matricula(idMatricula, "24-25", LocalDate.now().minusDays(10), new Alumno("Antonio rodríguez cuenca", "77241354V", "arc123@hotmail.com", "676873431", LocalDate.of(1999, 6, 14)), new Asignatura[3]);
     }
 }
