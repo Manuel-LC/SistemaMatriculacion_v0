@@ -13,10 +13,10 @@ import java.time.LocalDate;
 
 public class MainApp {
     public static final int CAPACIDAD=3;
-    private static final Alumnos alumnos = new Alumnos(CAPACIDAD);
-    private static final Asignaturas asignaturas = new Asignaturas(CAPACIDAD);
-    private static final CiclosFormativos ciclosFormativos = new CiclosFormativos(CAPACIDAD);
-    private static final Matriculas matriculas = new Matriculas(CAPACIDAD);
+    private static Alumnos alumnos = new Alumnos(CAPACIDAD);
+    private static Asignaturas asignaturas = new Asignaturas(CAPACIDAD);
+    private static CiclosFormativos ciclosFormativos = new CiclosFormativos(CAPACIDAD);
+    private static Matriculas matriculas = new Matriculas(CAPACIDAD);
 
     public static void main(String[] args) {
         Opcion opcion = Opcion.SALIR;
